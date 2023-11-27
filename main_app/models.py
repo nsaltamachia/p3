@@ -14,4 +14,6 @@ class Restaurant(models.Model):
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'restaurant_id': self.id})
+
+
     
