@@ -22,16 +22,15 @@
             <table class="striped">
                 <thead>
                     <tr>
-                        <th>Meal</th>
                         <th>Decription</th>
                         <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for meal_had in restaurant.meal.all %}
+                    {% for meal_had in restaurant.meal_had_set.all %}
                     <tr>
                         <td>{{ meal_had.date }}</td>
-                        <td>{{ meal_had.get_meal_display }}</td>
+                        <td>{{ meal_had.description }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
