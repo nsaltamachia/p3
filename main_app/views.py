@@ -33,9 +33,14 @@ def restaurant_detail(request, restaurant_id):
     })
 
 def add_comment(request, restaurant_id):
-  form = CommentForm(request.POST)
-  if form.is_valid():
-     new_comment = form.save(commit=False)
-     new_comment.restaurant_id = restaurant_id
-     new_comment.save()
-  return redirect('detail', restaurant_id=restaurant_id)
+  if request.method == 'POST':
+    form = CommentForm(request.POST)
+    if form.is_valid():
+      new_comment = form.save(commit=False)
+      new_comment.restaurant_id = restaurant_id
+      new_comment.save()
+      return redirect('detail', restaurant_id = restaurant_id)
+  else:
+        form = CommentForm()
+  return render(request, 'comment_form.html', {'form': form})
+
