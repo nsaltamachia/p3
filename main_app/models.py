@@ -18,14 +18,8 @@ class Restaurant(models.Model):
     
 class Comment(models.Model):
     comment = models.TextField(max_length=400)
-    created_at = models.DateTimeField(auto_now_add=True)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    upvotes = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"Comment by {self.user} on {self.post}"
+        return f"{self.id}"
     
-    class Meta:
-        ordering = ['-date']

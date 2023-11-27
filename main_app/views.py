@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Restaurant
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-
+from .forms import CommentForm
 
 # Create your views here.
 def home(request):
@@ -27,6 +27,15 @@ class RestaurantCreate(CreateView):
 
 def restaurant_detail(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
+    comment_form = CommentForm()
     return render(request, 'restaurants/detail.html', {
-        'restaurant': restaurant
+        'restaurant': restaurant, 'comment_form' : comment_form
     })
+
+def add_comment(request, restaurant_id):
+  form = CommentForm(request.POST)
+  if form.is_valid():
+     new_comment = form.save(commit=False)
+     new_comment.restaurant_id = restaurant_id
+     new_comment.save()
+  return redirect('detail', restaurant_id=restaurant_id)
