@@ -4,14 +4,15 @@
 <h1>Restaurant List</h1>
 
 {% for restaurant in restaurants %}
-  <div class="card">
-    <div class="card-content">
-      <span class="card-title">{{ restaurant.name }}</span>
-      <p>Address: {{ restaurant.address }}</p>
-      <p>Neighborhood: {{ restaurant.neighborhood }}</p>
-      <p>Cuisine: {{ restaurant.cuisine }}</p>
+  <a href="{% url 'detail' restaurant.id %}"></a>
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ restaurant.name }}</span>
+        <p>Address: {{ restaurant.address }}</p>
+        <p>Neighborhood: {{ restaurant.neighborhood }}</p>
+        <p>Cuisine: {{ restaurant.cuisine }}</p>
+      </div>
     </div>
-  </div>
 {% endfor %}
 
 {% endblock %}
