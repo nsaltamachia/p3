@@ -3,17 +3,13 @@
 
 <h1>Restaurant List</h1>
 
-{% for cat in cats %}
+{% for restaurant in restaurants %}
   <div class="card">
     <div class="card-content">
-      <span class="card-title">{{ cat.name }}</span>
-      <p>Breed: {{ cat.breed }}</p>
-      <p>Description: {{ cat.description }}</p>
-      {% if cat.age > 0 %}
-        <p>Age: {{ cat.age }}</p>
-      {% else %}
-        <p>Age: Kitten</p>
-      {% endif %}
+      <span class="card-title">{{ restaurant.name }}</span>
+      <p>Address: {{ restaurant.address }}</p>
+      <p>Neighborhood: {{ restaurant.neighborhood }}</p>
+      <p>Cuisine: {{ restaurant.cuisine }}</p>
     </div>
   </div>
 {% endfor %}
