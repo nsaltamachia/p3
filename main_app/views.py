@@ -17,7 +17,7 @@ def restaurants_index(request):
     }
   )
 
-def restaurant__detail(request, restaurant_id):
+def restaurant_detail(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
     return render(request, 'restaurants/detail.html', {
         'restaurant': restaurant
