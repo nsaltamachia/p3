@@ -28,11 +28,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for meal in restaurant.meals.all %}
+                    {% for meal_had in restaurant.meal.all %}
                     <tr>
-                        <td>{{ meal.name }}</td>
-                        <td>{{ meal.description }}</td>
-                        <td>{{ meal.date }}</td>
+                        <td>{{ meal_had.date }}</td>
+                        <td>{{ meal_had.get_meal_display }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
