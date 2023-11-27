@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Restaurant
 
 # Create your views here.
 def home(request):
@@ -9,7 +10,10 @@ def about(request):
     return render(request, 'about.html')
 
 def restaurants_index(request):
-  # We pass data to a template very much like we did in Express!
-  return render(request, 'restaurants/index.html', {
-    'restaurants': restaurants
-  })
+  restaurants = Restaurant.objects.all()
+  return render(request, 'restaurants/index.html', 
+    {
+       'restaurants' : restaurants
+    }
+  )
+
