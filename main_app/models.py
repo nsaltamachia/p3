@@ -22,7 +22,7 @@ class Meal_Had(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.get_meal_display()} on {self.date}'
+        return f'{self.description} on {self.date}'
     
     class Meta:
         ordering = ['-date']

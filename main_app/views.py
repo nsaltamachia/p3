@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Restaurant
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from .forms import Meal_Had_Form
 
 
 # Create your views here.
@@ -27,6 +28,7 @@ class RestaurantCreate(CreateView):
 
 def restaurant_detail(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
+    meal_had_form = Meal_Had_Form()
     return render(request, 'restaurants/detail.html', {
-        'restaurant': restaurant
+        'restaurant': restaurant, 'meal_had_form': meal_had_form
     })
