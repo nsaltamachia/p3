@@ -19,10 +19,14 @@ def restaurants_index(request):
     }
   )
 
+
 class RestaurantCreate(CreateView):
    model = Restaurant
    fields = '__all__'
-
    success_url = '/restaurants'
 
-   
+def restaurant_detail(request, restaurant_id):
+    restaurant = Restaurant.objects.get(id=restaurant_id)
+    return render(request, 'restaurants/detail.html', {
+        'restaurant': restaurant
+
