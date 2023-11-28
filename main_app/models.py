@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 from datetime import date
+
 
 # Create your models here.
 
@@ -25,9 +27,17 @@ class Meal_Had(models.Model):
 
     def __str__(self):
         return f'{self.description} on {self.date}'
-    
+      
+      
+class Comment(models.Model):
+    comment = models.TextField(max_length=400)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.id}"
+      
     class Meta:
         ordering = ['-date']
-
-
+      
+    
 
