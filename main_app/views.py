@@ -26,7 +26,7 @@ def restaurants_index(request):
 
 class RestaurantCreate(CreateView):
    model = Restaurant
-   fields = '__all__'
+   fields = ['name', 'address', 'neighborhood', 'cuisine']
    success_url = '/restaurants'
 
 
@@ -87,6 +87,10 @@ class RestaurantDelete(DeleteView):
 
 def assoc_seating(request, restaurant_id, seating_id):
   Restaurant.objects.get(id=restaurant_id).seating.add(seating_id)
+  return redirect('detail', restaurant_id=restaurant_id)
+
+def unassoc_seating(request, restaurant_id, seating_id):
+  Restaurant.objects.get(id=restaurant_id).seating.remove(seating_id)
   return redirect('detail', restaurant_id=restaurant_id)
 
 
