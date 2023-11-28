@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Restaurant
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 # Create your views here.
@@ -15,9 +15,15 @@ def restaurants_index(request):
   restaurants = Restaurant.objects.all()
   return render(request, 'restaurants/index.html', 
     {
-       'restaurants' : restaurants
+       'restaurants': restaurants
     }
   )
+
+def restaurant_detail(request, restaurant_id):
+    restaurant = Restaurant.objects.get(id=restaurant_id)
+    return render(request, 'restaurants/detail.html', {
+        'restaurant': restaurant
+    })
 
 
 class RestaurantCreate(CreateView):
@@ -25,8 +31,10 @@ class RestaurantCreate(CreateView):
    fields = '__all__'
    success_url = '/restaurants'
 
-def restaurant_detail(request, restaurant_id):
-    restaurant = Restaurant.objects.get(id=restaurant_id)
-    return render(request, 'restaurants/detail.html', {
-        'restaurant': restaurant
+class RestaurantUpdate(UpdateView):
+  model = Restaurant
+  fields = ['address', 'neighborhood', 'cuisine']
 
+class RestaurantDelete(DeleteView):
+  model = Restaurant
+  success_url = '/restaurants'
