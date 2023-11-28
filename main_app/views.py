@@ -24,13 +24,6 @@ def restaurants_index(request):
     }
   )
 
-def restaurant_detail(request, restaurant_id):
-    restaurant = Restaurant.objects.get(id=restaurant_id)
-    return render(request, 'restaurants/detail.html', {
-        'restaurant': restaurant
-    })
-
-
 class RestaurantCreate(CreateView):
    model = Restaurant
    fields = '__all__'
@@ -39,10 +32,13 @@ class RestaurantCreate(CreateView):
 
 def restaurant_detail(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
+    id_list = restaurant.seating.all().values_list('id')
+    seating_restaurant_doesnt_have = Seating.objects.exclude(id__in=id_list)
     meal_had_form = Meal_Had_Form()
     comment_form = CommentForm()
     return render(request, 'restaurants/detail.html', {
-      'restaurant': restaurant, 'meal_had_form': meal_had_form, 'comment_form' : comment_form
+      'restaurant': restaurant, 'meal_had_form': meal_had_form, 'comment_form' : comment_form,
+      'seating': seating_restaurant_doesnt_have
     })
    
 
@@ -73,8 +69,6 @@ def add_comment(request, restaurant_id):
         form = CommentForm()
   return render(request, 'comment_form.html', {'form': form})
 
- 
-
 def add_meal_had(request, restaurant_id):
     form = Meal_Had_Form(request.POST)
     if form.is_valid():
@@ -91,5 +85,8 @@ class RestaurantDelete(DeleteView):
   model = Restaurant
   success_url = '/restaurants'
 
+def assoc_seating(request, restaurant_id, seating_id):
+  Restaurant.objects.get(id=restaurant_id).seating.add(seating_id)
+  return redirect('detail', restaurant_id=restaurant_id)
 
 
