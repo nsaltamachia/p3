@@ -18,8 +18,13 @@ class Restaurant(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'restaurant_id': self.id})
 
+class MealPhoto(models.Model):
+    url = models.CharField(max_length=200)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 
-    
+    def __str__(self):
+        return f"photo for meal_had_id: {self.meal_had_id} @{self.url}"
+
 class Meal_Had(models.Model):
     date = models.DateField('meal date')
     description = models.TextField(max_length=250)
@@ -27,8 +32,7 @@ class Meal_Had(models.Model):
 
     def __str__(self):
         return f'{self.description} on {self.date}'
-      
-      
+           
 class Comment(models.Model):
     comment = models.TextField(max_length=400)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
@@ -40,4 +44,5 @@ class Comment(models.Model):
         ordering = ['-date']
       
     
+
 

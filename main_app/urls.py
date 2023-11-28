@@ -7,6 +7,7 @@ urlpatterns = [
     path('restaurants/', views.restaurants_index, name='index'),
     path('restaurants/create/', views.RestaurantCreate.as_view(), name='restaurants_create'),
     path('restaurants/<int:restaurant_id>/', views.restaurant_detail, name='detail'),
+    path('restaurants/<int:restaurant_id>/add_photo/', views.add_photo, name='add_photo'),
     path('restaurants/<int:restaurant_id>/add_comment/', views.add_comment, name='add_comment'),
     path('restaurants/<int:restaurant_id>/add_meal_had/', views.add_meal_had, name='add_meal_had'),
     path('restaurants/<int:pk>/update/', views.RestaurantUpdate.as_view(), name='restaurants_update'),
