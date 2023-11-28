@@ -5,6 +5,7 @@ import boto3
 from django.shortcuts import render, redirect
 from .models import Restaurant, MealPhoto, Comment, Meal_Had, Seating
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic import ListView, DetailView
 from .forms import CommentForm, Meal_Had_Form
 
 
@@ -84,6 +85,24 @@ class RestaurantUpdate(UpdateView):
 class RestaurantDelete(DeleteView):
   model = Restaurant
   success_url = '/restaurants'
+
+class SeatingList(ListView):
+  model = Seating
+
+class SeatingDetail(DetailView):
+  model = Seating
+
+class SeatingCreate(CreateView):
+  model = Seating
+  fields = '__all__'
+
+class SeatingUpdate(UpdateView):
+  model = Seating
+  fields = ['type', 'indoor', 'handicap']
+
+class SeatingDelete(DeleteView):
+  model = Seating
+  success_url = '/seating'
 
 def assoc_seating(request, restaurant_id, seating_id):
   Restaurant.objects.get(id=restaurant_id).seating.add(seating_id)
