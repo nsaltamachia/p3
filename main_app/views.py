@@ -3,7 +3,7 @@ import os
 import uuid
 import boto3
 from django.shortcuts import render, redirect
-from .models import Restaurant, MealPhoto, Comment, Meal_Had,
+from .models import Restaurant, MealPhoto, Comment, Meal_Had
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .forms import CommentForm, Meal_Had_Form
 

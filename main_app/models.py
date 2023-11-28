@@ -20,7 +20,7 @@ class Restaurant(models.Model):
 
 class MealPhoto(models.Model):
     url = models.CharField(max_length=200)
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    meal_had = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"photo for meal_had_id: {self.meal_had_id} @{self.url}"
@@ -29,7 +29,7 @@ class Meal_Had(models.Model):
     date = models.DateField('meal date')
     description = models.TextField(max_length=250)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-
+    
     def __str__(self):
         return f'{self.description} on {self.date}'
            
@@ -40,9 +40,21 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.id}"
       
-    class Meta:
-        ordering = ['-date']
-      
-    
+
+
+class Seating(models.Model):
+    TYPE_CHOICES = [
+        ('indoor', 'Indoor'),
+        ('outdoor', 'Outdoor'),
+        ('indoor_outdoor', 'Indoor & Outdoor'),
+    ]
+    YES_NO_CHOICES = [
+        ('y', 'Yes'),
+        ('n', 'No'),
+    ]
+    type = models.CharField(max_length=150)
+    indoor = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    handicap = models.CharField(max_length=1, choices=YES_NO_CHOICES)
+
 
 
