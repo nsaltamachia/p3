@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from datetime import date
+
 
 # Create your models here.
 
@@ -15,11 +17,27 @@ class Restaurant(models.Model):
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'restaurant_id': self.id})
+
+
     
+class Meal_Had(models.Model):
+    date = models.DateField('meal date')
+    description = models.TextField(max_length=250)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.description} on {self.date}'
+      
+      
 class Comment(models.Model):
     comment = models.TextField(max_length=400)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.id}"
+      
+    class Meta:
+        ordering = ['-date']
+      
     
+
