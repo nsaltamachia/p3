@@ -15,6 +15,8 @@ class Restaurant(models.Model):
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'restaurant_id': self.id})
+
+
     
 class Meal_Had(models.Model):
     date = models.DateField('meal date')

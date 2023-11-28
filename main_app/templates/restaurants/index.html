@@ -4,6 +4,7 @@
 <h1>Restaurant List</h1>
 
 {% for restaurant in restaurants %}
+
 <div class="card">
   <a href="{% url 'detail' restaurant.id %}">
   <div class="card-content">
@@ -13,6 +14,11 @@
     <p>Cuisine: {{ restaurant.cuisine }}</p>
   </div>
 </a>
+      <div class="card-action">
+        <a href="{% url 'restaurants_update' restaurant.id %}">Edit</a>
+        <a href="{% url 'restaurants_delete' restaurant.id %}">Delete</a>
+      </div>
+
     </div>
 {% endfor %}
 

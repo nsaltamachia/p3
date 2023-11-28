@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Restaurant
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .forms import Meal_Had_Form
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 
 
 # Create your views here.
@@ -16,15 +17,22 @@ def restaurants_index(request):
   restaurants = Restaurant.objects.all()
   return render(request, 'restaurants/index.html', 
     {
-       'restaurants' : restaurants
+       'restaurants': restaurants
     }
   )
+
+def restaurant_detail(request, restaurant_id):
+    restaurant = Restaurant.objects.get(id=restaurant_id)
+    return render(request, 'restaurants/detail.html', {
+        'restaurant': restaurant
+    })
 
 
 class RestaurantCreate(CreateView):
    model = Restaurant
    fields = '__all__'
    success_url = '/restaurants'
+
 
 def restaurant_detail(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
@@ -40,3 +48,12 @@ def add_meal_had(request, restaurant_id):
         new_meal_had.restaurant_id = restaurant_id
         new_meal_had.save()
     return redirect('detail', restaurant_id=restaurant_id)
+
+class RestaurantUpdate(UpdateView):
+  model = Restaurant
+  fields = ['address', 'neighborhood', 'cuisine']
+
+class RestaurantDelete(DeleteView):
+  model = Restaurant
+  success_url = '/restaurants'
+
