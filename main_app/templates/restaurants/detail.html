@@ -34,22 +34,7 @@
                     {% for meal_had in restaurant.meal_had_set.all %}
                     <tr>
                         <td>{{ meal_had.date }}</td>
-                        <td>{{ meal_had.description }}</td>
-                        <!-- IMAGE DISPLAY CODE START -->
-                        {% for photo in meal_had.photo_set.all %}
-                        <img class="responsive-img card-panel" src="{{mealphoto.url}}">
-                        {% empty %}
-                        <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-                        {% endfor %}
-                        <!-- IMAGE DISPLAY CODE END -->
-                        <!-- ADD IMAGE FORM CODE START -->
-                        <form action="{% url 'add_photo' restaurant.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
-                        {% csrf_token %}
-                        <input type="file" name="photo-file">
-                        <br><br>
-                        <button type="submit" class="btn">Upload Photo</button>
-        </form>
-        <!-- ADD IMAGE FORM CODE END -->
+                        <td>{{ meal_had.description }}</td>                     
                     </tr>
                     {% endfor %}
                 </tbody>

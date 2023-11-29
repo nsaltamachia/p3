@@ -3,11 +3,10 @@ import os
 import uuid
 import boto3
 from django.shortcuts import render, redirect
-from .models import Restaurant, MealPhoto, Comment, Meal_Had, Seating
+from .models import Restaurant, Comment, Meal_Had, Seating
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from .forms import CommentForm, Meal_Had_Form
-
 
 # Create your views here.
 def home(request):
@@ -30,7 +29,6 @@ class RestaurantCreate(CreateView):
    fields = ['name', 'address', 'neighborhood', 'cuisine']
    success_url = '/restaurants'
 
-
 def restaurant_detail(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
     id_list = restaurant.seating.all().values_list('id')
@@ -41,23 +39,7 @@ def restaurant_detail(request, restaurant_id):
       'restaurant': restaurant, 'meal_had_form': meal_had_form, 'comment_form' : comment_form,
       'seating': seating_restaurant_doesnt_have
     })
-   
 
-def add_photo(request, restaurant_id):
-   photo_file = request.FILES.get('photo-file', None)
-   if photo_file:
-      s3 = boto3.client('s3')
-      key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-      try:
-         bucket = os.environ['S3_bucket']
-         s3.upload_fileobj(photo_file, bucket, key)
-         url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
-         MealPhoto.objects.create(url=url, meal_had_id=meal_had_id)
-      except Exception as e:
-            print('An error occurred uploading file to S3')
-            print(e)
-      return redirect('detail', meal_had_id=meal_had_id)
-    
 def add_comment(request, restaurant_id):
   if request.method == 'POST':
     form = CommentForm(request.POST)

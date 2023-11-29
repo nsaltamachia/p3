@@ -40,14 +40,7 @@ class Meal_Had(models.Model):
     
     def __str__(self):
         return f'{self.description} on {self.date}'
-
-class MealPhoto(models.Model):
-    url = models.CharField(max_length=200)
-    meal_had = models.ForeignKey(Meal_Had, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"photo for meal_had_id: {self.meal_had_id} @{self.url}"
-           
+      
 class Comment(models.Model):
     comment = models.TextField(max_length=400)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
