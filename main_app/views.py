@@ -53,6 +53,7 @@ class SeatDetail(DetailView):
 class SeatUpdate(UpdateView):
   model = Seat
   fields = ['table_type', 'table_capacity', 'indoor_or_outdoor']
+  success_url = '/seats/'
 
 class SeatDelete(DeleteView):
   model = Seat
