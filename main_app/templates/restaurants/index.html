@@ -15,10 +15,10 @@
     </div>
   </a>
       <div class="card-action">
-        <a href="{% url 'restaurants_update' restaurant.id %}">Edit</a>
-        <a href="{% url 'restaurants_delete' restaurant.id %}">Delete</a>
+        <a id="ED" href="{% url 'restaurants_update' restaurant.id %}">Edit</a>
+        <a id="ED" href="{% url 'restaurants_delete' restaurant.id %}">Delete</a>
       </div>
-  
+</div>  
 {% endfor %}
 
 {% endblock %}
