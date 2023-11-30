@@ -1,12 +1,9 @@
 {% extends 'base.html' %}
+
 {% block content %}
-  {% if object %}
-    <h1>Edit <span class="teal-text">{{object.type}}</span></h1>
-  {% else %}
-    <h1>Add Seating</h1>
-  {% endif %}
+  <h1>Add Seating Type</h1>
   <!-- Leaving the action empty makes the form post to the same url used to display it -->
-  <form action="" method="post">
+  <form action="" method="POST">
     <!-- Django requires the following for security purposes -->
     {% csrf_token %}
     <table>
@@ -16,12 +13,3 @@
     <input type="submit" value="Submit!" class="btn">
   </form>
 {% endblock %}
-
-
-
-
-
-
-
-
-

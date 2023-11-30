@@ -77,42 +77,46 @@
     <input type="submit" class="btn" value="Add Comment">
   </form>
 </div>
-
-<!-- Seating Section -->
-
+<!-- Associated Seating -->
 <hr>
 <div class="row">
   <div class="col s6">
     <h3>{{ restaurant.name }}'s Seating 🪑</h3>
-    {% if restaurant.seatings.count %}
-      {% for seating in restaurant.seatings.all %}
+    {% if restaurant.seats.count %}
+      {% for seat in restaurant.seats.all %}
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              <span>{{ seating.indoor }}</span> {{ seating.type }}
+              <span>{{ seat.table_capacity }}</span> {{ seat.table_type }}
             </span>
           </div>
+          <div class="card-action">
+          <form action="{% url 'unassoc_seat' restaurant.id seat.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn">Remove</button>
+          </form>
         </div>
+      </div>
       {% endfor %}
     {% else %}
       <h5>No Seating</h5>
     {% endif %}
   </div>
-  <!-- Available toys will come after this line -->
+  <!-- Available seating will come after this line -->
   <div class="col s6">
-  <a href="{% url 'seating_create' %}">Add a Seating Type</a>
-  <a href="{% url 'seating_index' %}">View All Seating Types</a>
+  <a href="{% url 'seat_create' %}">Add a Seating Type</a>
+  <a href="{% url 'seat_list' %}">View All Seating Types</a>
   <h3>Seating Options</h3>
-  {% if seatings.count %}
-    {% for seating in seatings.all %}
+  {% if seats.count %}
+    {% for seat in seats.all %}
       <div class="card">
         <div class="card-content">
           <span class="card-title">
-            <span>{{ seating.indoor }}</span> {{ seating.type }}
+            <span>{{ seat.table_capacity }}</span> {{ seat.table_type }}
           </span>
         </div>
         <div class="card-action">
-          <form action="{% url 'assoc_seating' restaurant.id seating.id %}" method="POST">
+          <form action="{% url 'assoc_seat' restaurant.id seat.id %}" method="POST">
             {% csrf_token %}
             <button type="submit" class="btn">Add</button>
           </form>
@@ -134,6 +138,7 @@
       setDefaultDate: true,
       autoClose: true
     });
+
   </script>
     
 {% endblock %}

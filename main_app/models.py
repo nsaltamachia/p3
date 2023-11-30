@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 from django.urls import reverse
 from django.contrib.auth.models import User
 from datetime import date
@@ -6,26 +7,20 @@ from datetime import date
 
 # Create your models here.
 
-class Seating(models.Model):
-    TYPE_CHOICES = [
-        ('indoor', 'Indoor'),
-        ('outdoor', 'Outdoor'),
-        ('indoor_outdoor', 'Indoor & Outdoor'),
-    ]
-    YES_NO_CHOICES = [
-        ('y', 'Yes'),
-        ('n', 'No'),
-    ]
-    type = models.CharField(max_length=150)
-    indoor = models.CharField(max_length=20, choices=TYPE_CHOICES)
-    handicap = models.CharField(max_length=1, choices=YES_NO_CHOICES)
+class Seat(models.Model):
+    table_type = models.CharField(max_length=50)
+    table_capacity = models.IntegerField()
+    indoor_or_outdoor = models.CharField(max_length=7)
 
+    def __str__(self):
+        return f"{self.seat_number}"
+    
 class Restaurant(models.Model):
     name = models.CharField(max_length=150)
     address = models.CharField(max_length=150)
     neighborhood = models.TextField(max_length=150)
     cuisine = models.TextField(max_length=150)
-    seating = models.ManyToManyField(Seating)
+    seats = models.ManyToManyField(Seat)
     
     def __str__(self):
         return f'{self.name} ({self.id})'

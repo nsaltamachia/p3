@@ -2,6 +2,8 @@
 import os
 import uuid
 import boto3
+from django.shortcuts import render, redirect
+from .models import Restaurant, Comment, Meal_Had, Seat
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Restaurant, Comment, Meal_Had, Seating
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -29,15 +31,45 @@ class RestaurantCreate(CreateView):
    fields = ['name', 'address', 'neighborhood', 'cuisine']
    success_url = '/restaurants'
 
+class RestaurantUpdate(UpdateView):
+  model = Restaurant
+  fields = ['address', 'neighborhood', 'cuisine']
+
+class RestaurantDelete(DeleteView):
+  model = Restaurant
+  success_url = '/restaurants'
+
+class SeatCreate(CreateView):
+  model = Seat
+  fields = ['table_type', 'table_capacity', 'indoor_or_outdoor']
+  success_url = '/seats/'
+
+  def get_absolute_url(self):
+    return reverse('detail', kwargs={'seat_id': self.id})
+class SeatList(ListView):
+  model = Seat
+
+class SeatDetail(DetailView):
+  model = Seat
+
+class SeatUpdate(UpdateView):
+  model = Seat
+  fields = ['table_type', 'table_capacity', 'indoor_or_outdoor']
+  success_url = '/seats/'
+
+class SeatDelete(DeleteView):
+  model = Seat
+  success_url = '/seats'
+
 def restaurant_detail(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
-    id_list = restaurant.seating.all().values_list('id')
-    seating_restaurant_doesnt_have = Seating.objects.exclude(id__in=id_list)
+    id_list = restaurant.seats.all().values_list('id')
+    seats_restaurant_doesnt_have = Seat.objects.exclude(id__in=id_list)
     meal_had_form = Meal_Had_Form()
     comment_form = CommentForm()
     return render(request, 'restaurants/detail.html', {
       'restaurant': restaurant, 'meal_had_form': meal_had_form, 'comment_form' : comment_form,
-      'seating': seating_restaurant_doesnt_have
+      'seats': seats_restaurant_doesnt_have
     })
 
 def add_comment(request, restaurant_id):
@@ -93,38 +125,14 @@ def add_meal_had(request, restaurant_id):
         new_meal_had.save()
     return redirect('detail', restaurant_id=restaurant_id)
 
-class RestaurantUpdate(UpdateView):
-  model = Restaurant
-  fields = ['address', 'neighborhood', 'cuisine']
-
-class RestaurantDelete(DeleteView):
-  model = Restaurant
-  success_url = '/restaurants'
-
-class SeatingList(ListView):
-  model = Seating
-
-class SeatingDetail(DetailView):
-  model = Seating
-
-class SeatingCreate(CreateView):
-  model = Seating
-  fields = '__all__'
-
-class SeatingUpdate(UpdateView):
-  model = Seating
-  fields = ['type', 'indoor', 'handicap']
-
-class SeatingDelete(DeleteView):
-  model = Seating
-  success_url = '/seating'
-
-def assoc_seating(request, restaurant_id, seating_id):
-  Restaurant.objects.get(id=restaurant_id).seating.add(seating_id)
+def assoc_seat(request, restaurant_id, seat_id):
+  # Note that you can pass a toy's id instead of the whole toy object
+  Restaurant.objects.get(id=restaurant_id).seats.add(seat_id)
   return redirect('detail', restaurant_id=restaurant_id)
 
-def unassoc_seating(request, restaurant_id, seating_id):
-  Restaurant.objects.get(id=restaurant_id).seating.remove(seating_id)
+def unassoc_seat(request, restaurant_id, seat_id):
+  # Note that you can pass a toy's id instead of the whole toy object
+  Restaurant.objects.get(id=restaurant_id).seats.remove(seat_id)
   return redirect('detail', restaurant_id=restaurant_id)
 
 
