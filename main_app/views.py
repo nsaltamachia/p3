@@ -29,6 +29,11 @@ class RestaurantCreate(CreateView):
    fields = ['name', 'address', 'neighborhood', 'cuisine']
    success_url = '/restaurants'
 
+   def form_valid(self, form):
+     # Assign the logged in user (self.request.user)
+     form.instance.user = self.request.user
+     return super().form_valid(form)
+
 class RestaurantUpdate(UpdateView):
   model = Restaurant
   fields = ['address', 'neighborhood', 'cuisine']
