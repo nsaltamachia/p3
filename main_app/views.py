@@ -3,7 +3,7 @@ import os
 import uuid
 import boto3
 from django.shortcuts import render, redirect
-from .models import Restaurant, Comment, Meal_Had, Seat
+from .models import Restaurant, Comment, Meal_Had, Seat, Meal, Photo
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from .forms import CommentForm, Meal_Had_Form
@@ -11,6 +11,8 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+
 
 # Create your views here.
 def home(request):
@@ -73,6 +75,61 @@ class SeatDelete(LoginRequiredMixin, DeleteView):
   model = Seat
   success_url = '/seats'
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class MealCreate(LoginRequiredMixin, CreateView):
+  model = Meal
+  fields = ['date', 'description', 'image']
+  success_url = '/meals/'
+
+  def get_absolute_url(self):
+    return reverse('detail', kwargs={'meal_id': self.id})
+
+
+def add_photo(request, meal_id):
+  # photo-file will be the "name" attribute on the <input type="file">
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    # need a unique "key" for S3 / needs image file extension too
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    # just in case something goes wrong
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      # build the full url string
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      # we can assign to meal_id or meal (if you have a meal object)
+      photo = Photo(url=url, meal_id=meal_id)
+      photo.save()
+    except:
+      print('An error occurred uploading file to S3')
+  return redirect('detail', meal_id=meal_id)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @login_required
 def restaurant_detail(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
@@ -98,6 +155,7 @@ def add_comment(request, restaurant_id):
         form = CommentForm()
   return render(request, 'comment_form.html', {'form': form})
 
+
 @login_required
 def add_meal_had(request, restaurant_id):
     form = Meal_Had_Form(request.POST)
@@ -106,6 +164,10 @@ def add_meal_had(request, restaurant_id):
         new_meal_had.restaurant_id = restaurant_id
         new_meal_had.save()
     return redirect('detail', restaurant_id=restaurant_id)
+
+
+
+
 
 @login_required
 def assoc_seat(request, restaurant_id, seat_id):

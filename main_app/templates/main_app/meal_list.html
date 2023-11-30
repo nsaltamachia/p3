@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Seating Types List</h1>
+
+{% for seat in seat_list %}
+
+<div class="card">
+  <a href="{% url 'detail' seat.id %}">
+    <div class="card-content">
+      <span class="card-title">{{ seat.table_type }}</span>
+        <p>Seating Capacity: {{ seat.table_capacity }}</p>
+        <p>Indoor or Outdoor: {{ seat.indoor_or_outdoor }}</p>
+      </div>
+      <div class="card-action">
+        <a href="{% url 'seats_update' seat.id %}">Edit</a>
+        <a href="{% url 'seats_delete' seat.id %}">Delete</a>
+      </div>
+  </a>
+</div>
+  
+{% endfor %}
+
+{% endblock %}

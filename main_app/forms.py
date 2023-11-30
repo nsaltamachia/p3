@@ -1,6 +1,6 @@
 from django.forms import ModelForm, widgets
 from django import forms
-from .models import Comment, Meal_Had, Seat
+from .models import Comment, Meal_Had, Seat, Meal, Photo
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
@@ -16,3 +16,9 @@ class SeatForm(ModelForm):
         model = Seat
         fields = ['table_type', 'table_capacity', 'indoor_or_outdoor']
      
+
+
+class MealForm(ModelForm):
+    class Meta:
+        model = Meal
+        fields = ['date', 'description', 'restaurant', 'image']
