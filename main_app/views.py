@@ -92,12 +92,12 @@ def add_meal_had(request, restaurant_id):
 
 def assoc_seat(request, restaurant_id, seat_id):
   # Note that you can pass a toy's id instead of the whole toy object
-  Restaurant.objects.get(id=restaurant_id).seats.add(toy_id)
+  Restaurant.objects.get(id=restaurant_id).seats.add(seat_id)
   return redirect('detail', restaurant_id=restaurant_id)
 
 def unassoc_seat(request, restaurant_id, seat_id):
   # Note that you can pass a toy's id instead of the whole toy object
-  Restaurant.objects.get(id=restaurant_id).seats.add(toy_id)
+  Restaurant.objects.get(id=restaurant_id).seats.remove(seat_id)
   return redirect('detail', restaurant_id=restaurant_id)
 
 
