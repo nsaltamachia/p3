@@ -1,5 +1,4 @@
-from django.forms import ModelForm, widgets
-from django import forms
+from django.forms import ModelForm
 from .models import Comment, Meal_Had, Seat
 class CommentForm(ModelForm):
     class Meta:
