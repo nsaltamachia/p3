@@ -7,6 +7,11 @@ urlpatterns = [
     path('restaurants/', views.restaurants_index, name='index'),
     path('restaurants/<int:restaurant_id>/', views.restaurant_detail, name='detail'),
     path('restaurants/create/', views.RestaurantCreate.as_view(), name='restaurants_create'),
+    # Comment CRUD
+    path('restaurants/<int:restaurant_id>/add_comment/', views.add_comment, name='add_comment'),
+    path('restaurants/<int:restaurant_id>/update_comment/<int:comment_id>/', views.update_comment, name='update_comment'),
+    path('restaurants/<int:restaurant_id>/delete_comment/<int:pk>', views.delete_comment, name='delete_comment'),
+    path('restaurants/<int:restaurant_id>/add_meal_had/', views.add_meal_had, name='add_meal_had'),
     path('restaurants/<int:pk>/update/', views.RestaurantUpdate.as_view(), name='restaurants_update'),
     path('restaurants/<int:pk>/delete/', views.RestaurantDelete.as_view(), name='restaurants_delete'),
     path('restaurants/<int:restaurant_id>/add_comment/', views.add_comment, name='add_comment'),

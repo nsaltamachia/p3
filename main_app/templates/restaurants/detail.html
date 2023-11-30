@@ -46,26 +46,36 @@
 <!-- COMMENTS SECTION -->
 <h2>Comments</h2>
 
+<div>
+  <table class="striped">
+    <thead>
+      <tr><th>User</th><th>Comment</th></tr>
+    </thead>
+    <tbody>
+      {% for comment in restaurant.comment_set.all %}
+        <tr>
+          <!-- User feature goes here -->
+          <!-- <td>{{comment.user}}</td> -->
+          <td>{{comment.comment}}</td>
+          <a href="{% url 'update_comment' comment_id restaurant_id %}">
+            <td><button type="update" class="btn">Edit</button></td>
+          </a>
+          <a href="{% url 'delete_comment' pk=comment.pk restaurant_id=restaurant.id %}">
+            <td><button type="delete" class="btn">Delete</button></td>
+          </a>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br>
 <div class="col s6">
-    <form action="{% url 'add_comment' restaurant_id=restaurant.id %}" method="POST">
+  <form action="{% url 'add_comment' restaurant_id=restaurant.id %}" method="POST">
     {% csrf_token %}
     <!-- Render the inputs -->
     {{ comment_form.as_p }}
     <input type="submit" class="btn" value="Add Comment">
   </form>
-    <table class="striped">
-      <thead>
-        <tr><th>Comment</th><th>User</th></tr>
-      </thead>
-      <tbody>
-        {% for comment in restaurant.comment_set.all %}
-          <tr>
-            <td>{{comment.comment}}</td>
-            
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
 </div>
 <!-- Associated Seating -->
 <hr>
