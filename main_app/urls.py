@@ -16,8 +16,8 @@ urlpatterns = [
     path('seats/', views.SeatList.as_view(), name='seat_list'),
     path('seats/<int:pk>/', views.SeatDetail.as_view(), name='seat_detail'),
     path('seats/create/', views.SeatCreate.as_view(), name='seat_create'),
-    path('seats/<int:pk>/update/', views.SeatUpdate.as_view(), name='seat_update'),
-    path('seats/<int:pk>/delete/', views.SeatDelete.as_view(), name='seat_delete'),
+    path('seats/<int:pk>/update/', views.SeatUpdate.as_view(), name='seats_update'),
+    path('seats/<int:pk>/delete/', views.SeatDelete.as_view(), name='seats_delete'),
 ]
 
 
