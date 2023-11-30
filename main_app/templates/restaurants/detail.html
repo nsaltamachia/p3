@@ -88,7 +88,8 @@
   </div>
   <!-- Available seating will come after this line -->
   <div class="col s6">
-  
+  <a href="{% url 'seats_create' %}">Add a Seating Type</a>
+  <a href="{% url 'seats_index' %}">View All Seating Types</a>
   <h3>Seating Options</h3>
   {% if seats.count %}
     {% for seat in seats.all %}

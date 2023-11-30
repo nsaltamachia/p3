@@ -37,6 +37,27 @@ class RestaurantDelete(DeleteView):
   model = Restaurant
   success_url = '/restaurants'
 
+class SeatCreate(CreateView):
+  model = Seat
+  fields = ['table_type', 'table_capacity', 'indoor_or_outdoor']
+  success_url = '/seats/'
+
+  def get_absolute_url(self):
+    return reverse('detail', kwargs={'seat_id': self.id})
+class SeatList(ListView):
+  model = Seat
+
+class SeatDetail(DetailView):
+  model = Seat
+
+class SeatUpdate(UpdateView):
+  model = Seat
+  fields = ['table_type', 'table_capacity', 'indoor_or_outdoor']
+
+class SeatDelete(DeleteView):
+  model = Seat
+  success_url = '/seats'
+
 def restaurant_detail(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
     id_list = restaurant.seats.all().values_list('id')
