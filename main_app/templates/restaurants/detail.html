@@ -14,7 +14,13 @@
                 <p>{{ restaurant.neighborhood }}</p>
                 <p>{{ restaurant.cuisine }}</p>
             </div>
-            <!-- Meal Had  -->
+            </div>
+        </div>
+    </div>
+            <br>
+
+<!-- Meal Had  -->
+  <h2>Meals Had</h2>
             <div class="card-content">
               <form action="{% url 'add_meal_had' restaurant.id %}" method="POST">
                 {% csrf_token %}
@@ -27,13 +33,13 @@
                     {% for meal_had in restaurant.meal_had_set.all %}
                     <tr>
                       <td>{{ meal_had.date }}</td>
-                      <td>{{ meal_had.description }}</td>                     
+                      <td>{{ meal_had.description }}</td>                    
                     </tr>
                     {% endfor %}
                   </tbody>
                 </div>
                 </table>
-          </div>
+          
     </div>
 </div>
 
@@ -48,8 +54,7 @@
     <tbody>
       {% for comment in restaurant.comment_set.all %}
         <tr>
-          <!-- User feature goes here -->
-          <!-- <td>{{comment.user}}</td> -->
+          <td>{{comment.user}}</td>
           <td>{{comment.comment}}</td>
             {% csrf_token %}
             <td><button type="button" class="btn delete-btn" data-comment-id="{{ comment.id }}" data-restaurant-id="{{ restaurant.id }}" data-csrf="{{ csrf_token }}">Delete</button></td>
@@ -80,7 +85,12 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              <span>{{ seat.table_capacity }}</span> {{ seat.table_type }}
+              <span> Indoor/Outdoor: {{ seat.indoor_or_outdoor }}</span>
+              <br>
+              <span>Seats: {{ seat.table_capacity }}</span>
+              <br>
+              <span>Table Type: {{ seat.table_type }}</span>
+              <br>
             </span>
           </div>
           <div class="card-action">
@@ -105,8 +115,13 @@
       <div class="card">
         <div class="card-content">
           <span class="card-title">
-            <span>{{ seat.table_capacity }}</span> {{ seat.table_type }}
-          </span>
+              <span> Indoor/Outdoor: {{ seat.indoor_or_outdoor }}</span>
+              <br>
+              <span>Seats: {{ seat.table_capacity }}</span>
+              <br>
+              <span>Table Type: {{ seat.table_type }}</span>
+              <br>
+            </span>
         </div>
         
         <div class="card-action">
