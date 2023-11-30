@@ -40,6 +40,7 @@ class Meal_Had(models.Model):
 class Comment(models.Model):
     comment = models.TextField(max_length=400)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.id}"
