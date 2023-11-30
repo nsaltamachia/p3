@@ -3,7 +3,7 @@
 
 <h1>Seating Types List</h1>
 
-{% for seat in seats %}
+{% for seat in seat_list %}
 
 <div class="card">
   <a href="{% url 'detail' seat.id %}">
@@ -13,8 +13,8 @@
         <p>Indoor or Outdoor: {{ seat.indoor_or_outdoor }}</p>
       </div>
       <div class="card-action">
-        <a href="{% url 'seats_update' seat.id %}">Edit</a>
-        <a href="{% url 'seats_delete' seat.id %}">Delete</a>
+        <a href="{% url 'seat_update' seat.id %}">Edit</a>
+        <a href="{% url 'seat_delete' seat.id %}">Delete</a>
       </div>
   </a>
 </div>

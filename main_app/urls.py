@@ -13,11 +13,11 @@ urlpatterns = [
     path('restaurants/<int:restaurant_id>/add_meal_had/', views.add_meal_had, name='add_meal_had'),
     path('restaurants/<int:restaurant_id>/assoc_seat/<int:seat_id>/', views.assoc_seat, name='assoc_seat'),
     path('restaurants/<int:restaurant_id>/unassoc_seat/<int:seat_id>/', views.unassoc_seat, name='unassoc_seat'),
-    path('seats/', views.SeatList.as_view(), name='seats_index'),
-    path('seats/<int:pk>/', views.SeatDetail.as_view(), name='seats_detail'),
-    path('seats/create/', views.SeatCreate.as_view(), name='seats_create'),
-    path('seats/<int:pk>/update/', views.SeatUpdate.as_view(), name='seats_update'),
-    path('seats/<int:pk>/delete/', views.SeatDelete.as_view(), name='seats_delete'),
+    path('seats/', views.SeatList.as_view(), name='seat_list'),
+    path('seats/<int:pk>/', views.SeatDetail.as_view(), name='seat_detail'),
+    path('seats/create/', views.SeatCreate.as_view(), name='seat_create'),
+    path('seats/<int:pk>/update/', views.SeatUpdate.as_view(), name='seat_update'),
+    path('seats/<int:pk>/delete/', views.SeatDelete.as_view(), name='seat_delete'),
 ]
 
 
