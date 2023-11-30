@@ -7,7 +7,6 @@ urlpatterns = [
     path('restaurants/', views.restaurants_index, name='index'),
     path('restaurants/<int:restaurant_id>/', views.restaurant_detail, name='detail'),
     path('restaurants/create/', views.RestaurantCreate.as_view(), name='restaurants_create'),
-    # Comment CRUD
     path('restaurants/<int:restaurant_id>/add_comment/', views.add_comment, name='add_comment'),
     path('restaurants/<int:restaurant_id>/update_comment/<int:comment_id>/', views.update_comment, name='update_comment'),
     path('restaurants/<int:restaurant_id>/delete_comment/<int:comment_id>/', views.delete_comment, name='delete_comment'),
@@ -24,7 +23,3 @@ urlpatterns = [
     path('seats/<int:pk>/update/', views.SeatUpdate.as_view(), name='seats_update'),
     path('seats/<int:pk>/delete/', views.SeatDelete.as_view(), name='seats_delete'),
 ]
-
-
- 
-
