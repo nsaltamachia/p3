@@ -113,9 +113,11 @@ def update_comment(request, restaurant_id):
 #         form = CommentForm()
 #   return render(request, 'comment_form.html', {'form': form})
 
-def delete_comment(request, restaurant_id, pk):
-  Comment.objects.get(id = pk).delete()
-  return render(request, 'comment_form.html')
+def delete_comment(request, comment_id, restaurant_id):
+  if request.method == 'DELETE':
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment.delete()
+  return redirect('detail', restaurant_id=restaurant_id)
 
 def add_meal_had(request, restaurant_id):
     form = Meal_Had_Form(request.POST)

@@ -57,9 +57,9 @@
           <!-- User feature goes here -->
           <!-- <td>{{comment.user}}</td> -->
           <td>{{comment.comment}}</td>
-          <a href="{% url 'delete_comment' pk=comment.pk restaurant_id=restaurant.id %}">
-            <td><button type="delete" class="btn">Delete</button></td>
-          </a>
+            {% csrf_token %}
+            <td><button type="button" class="btn delete-btn" data-comment-id="{{ comment.id }}" data-restaurant-id="{{ restaurant.id }}" data-csrf="{{ csrf_token }}">Delete</button></td>
+          <!-- </a> -->
         </tr>
       {% endfor %}
     </tbody>
@@ -75,6 +75,9 @@
   </form>
 </div>
 <!-- Associated Seating -->
+
+<!-- Seating Section -->
+
 <hr>
 <div class="row">
   <div class="col s6">
@@ -127,16 +130,36 @@
 </div>
 
 <script>
-    const dateEl = document.getElementById('id_date');
-    // M is Materialize's global variable
-    M.Datepicker.init(dateEl, {
-      format: 'yyyy-mm-dd',
-      defaultDate: new Date(),
-      setDefaultDate: true,
-      autoClose: true
-    });
+  const dateEl = document.getElementById('id_date');
+  // M is Materialize's global variable
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+  
+  document.querySelectorAll('.delete-btn').forEach(function(button) {
+  button.addEventListener('click', function() {
+    var commentId = this.dataset.commentId;
+    var restaurantId = this.dataset.restaurantId;
+    var csrftoken = this.dataset.csrf;
 
-  </script>
+    fetch(`/restaurants/${restaurantId}/delete_comment/${commentId}/`, {
+      method: 'DELETE',
+      headers: {
+        'X-CSRFToken': csrftoken
+      }
+    }).then(function(response) {
+      if (response.ok) {
+        button.closest('tr').remove();
+      } else {
+        console.error('Delete failed');
+      }
+    });
+  });
+});
+</script>
     
 {% endblock %}
 
