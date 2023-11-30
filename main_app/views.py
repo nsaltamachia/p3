@@ -5,7 +5,7 @@ import boto3
 from django.shortcuts import render, redirect
 from .models import Restaurant, Comment, Meal_Had, Seat
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Restaurant, Comment, Meal_Had, Seating
+from .models import Restaurant, Comment, Meal_Had, Seat
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from .forms import CommentForm, Meal_Had_Form
