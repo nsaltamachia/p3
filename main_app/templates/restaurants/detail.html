@@ -57,7 +57,7 @@
           <!-- User feature goes here -->
           <!-- <td>{{comment.user}}</td> -->
           <td>{{comment.comment}}</td>
-          <a href="{% url 'update_comment' comment_id restaurant_id %}">
+          
             <td><button type="update" class="btn">Edit</button></td>
           </a>
           <a href="{% url 'delete_comment' pk=comment.pk restaurant_id=restaurant.id %}">
