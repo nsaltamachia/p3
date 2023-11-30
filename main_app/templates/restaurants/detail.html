@@ -16,24 +16,6 @@
     </div>
 </div>        
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- MEAL FORM -->
         <div class="col s6">
             <form action="{% url 'add_meal_had' restaurant.id %}" method="POST">
@@ -55,16 +37,7 @@
                     {% for meal_had in restaurant.meal_had_set.all %}
                     <tr>
                         <td>{{ meal_had.date }}</td>
-                        <td>{{ meal_had.description }}</td>  
-                        <!-- <td>
-                          <a href="{% url 'meal_had_update' pk=meal_had.id %}">Edit</a>
-                          <form action="{% url 'meal_had_delete' pk=meal_had.pk %}" method="post">
-                            {% csrf_token %}
-                            <input type="submit" value="Delete">
-                          </form>
-
-                           <a href="{% url 'meal_had_delete' meal_had.id %}">Delete</a> -->
-                        </td>               
+                        <td>{{ meal_had.description }}</td>              
                     </tr>                   
                     {% endfor %}
                 </tbody>

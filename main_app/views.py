@@ -94,8 +94,15 @@ class MealCreate(LoginRequiredMixin, CreateView):
   fields = ['date', 'description', 'image']
   success_url = '/meals/'
 
+  def form_valid(self, form):
+      form.instance.restaurant_id = self.kwargs['restaurant_id']
+      return super().form_valid(form)
+
+  def get_success_url(self):
+      return reverse('restaurant_detail', kwargs={'restaurant_id': self.kwargs['restaurant_id']})
+
   def get_absolute_url(self):
-    return reverse('detail', kwargs={'meal_id': self.id})
+    return reverse('detail', kwargs={'meal_id': self.id, 'restaurant': restaurant})
 
 
 def add_photo(request, meal_id):
@@ -116,6 +123,36 @@ def add_photo(request, meal_id):
     except:
       print('An error occurred uploading file to S3')
   return redirect('detail', meal_id=meal_id)
+
+
+def meals_index(request):
+  meals = Meal.objects.all()
+  return render(request, 'meals/index.html', { 'meals': meals })
+
+  def get_absolute_url(self):
+    return reverse('detail', kwargs={'meal_id': self.id})
+
+def meals_detail(request, meal_id):
+  meal = Meal.objects.get(id=meal_id)
+  return render(request, 'meals/detail.html', {
+    'meal': meal
+  })
+
+class MealList(LoginRequiredMixin, ListView):
+  model = Meal
+
+class MealDetail(LoginRequiredMixin, DetailView):
+  model = Meal
+
+class MealUpdate(LoginRequiredMixin, UpdateView):
+  model = Meal
+  fields = ['date', 'description', 'image']
+  success_url = '/meals/'
+
+class MealDelete(LoginRequiredMixin, DeleteView):
+  model = Meal
+  success_url = '/meals'
+
 
 
 
@@ -139,7 +176,7 @@ def restaurant_detail(request, restaurant_id):
     comment_form = CommentForm()
     return render(request, 'restaurants/detail.html', {
       'restaurant': restaurant, 'meal_had_form': meal_had_form, 'comment_form' : comment_form,
-      'seats': seats_restaurant_doesnt_have
+      'seats': seats_restaurant_doesnt_have, 
     })
 
 @login_required
