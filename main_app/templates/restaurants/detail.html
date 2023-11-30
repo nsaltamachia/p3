@@ -86,17 +86,22 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              <span class="card-title">
-                <span>{{ seat.table_capacity }}</span> {{ seat.table_type }}
-              </span>
+              <span>{{ seat.table_capacity }}</span> {{ seat.table_type }}
+            </span>
           </div>
+          <div class="card-action">
+          <form action="{% url 'unassoc_seat' restaurant.id seat.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn">Remove</button>
+          </form>
         </div>
+      </div>
       {% endfor %}
     {% else %}
       <h5>No Seating</h5>
     {% endif %}
   </div>
-  <!-- Available toys will come after this line -->
+  <!-- Available seating will come after this line -->
   <div class="col s6">
   <a href="{% url 'seat_create' %}">Add a Seating Type</a>
   <a href="{% url 'seat_list' %}">View All Seating Types</a>
@@ -106,10 +111,10 @@
       <div class="card">
         <div class="card-content">
           <span class="card-title">
-            <span class="card-title">
-              <span>{{ seat.table_capacity }}</span> {{ seat.table_type }}
-            </span>
+            <span>{{ seat.table_capacity }}</span> {{ seat.table_type }}
+          </span>
         </div>
+        
         <div class="card-action">
           <form action="{% url 'assoc_seat' restaurant.id seat.id %}" method="POST">
             {% csrf_token %}
