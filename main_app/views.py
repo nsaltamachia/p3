@@ -99,35 +99,6 @@ def add_comment(request, restaurant_id):
   else:
     form = CommentForm()
 
-def update_comment(request, restaurant_id):
-  restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
-  if comment_id:
-     comment = get_object_or_404(Comment, pk=comment_id)
-     if request.method =='POST':
-        form = CommentForm(request.POST, instance=comment)
-        if form.is_valid():
-           form.save()
-           return redirect('detail', restaurant_id=restaurant_id)
-  else:
-    form = CommentForm
-  return render(request, 'comment_form.html', {
-     'form': form,
-     'restaurant': restaurant,
-     'comment_id': comment_id
-  })
-
-# def update_comment(request, restaurant_id, pk):
-#   update_comment = Comment.objects.get(id = pk)
-#   if request.method == 'POST':
-#     form = CommentForm(request.POST)
-#     if form.is_valid():
-#       update_comment = form.save(commit=False)
-#       update_comment.restaurant_id = restaurant_id
-#       update_comment.save()
-#       return redirect('detail', restaurant_id = restaurant_id)
-#   else:
-#         form = CommentForm()
-#   return render(request, 'comment_form.html', {'form': form})
 
 def delete_comment(request, comment_id, restaurant_id):
   if request.method == 'DELETE':

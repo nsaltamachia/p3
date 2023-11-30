@@ -14,32 +14,26 @@
                 <p>{{ restaurant.neighborhood }}</p>
                 <p>{{ restaurant.cuisine }}</p>
             </div>
-        </div>
-        <!-- Meal Had  -->
-        <div class="col s6">
-            <form action="{% url 'add_meal_had' restaurant.id %}" method="POST">
+            <!-- Meal Had  -->
+            <div class="card-content">
+              <form action="{% url 'add_meal_had' restaurant.id %}" method="POST">
                 {% csrf_token %}
                 {{ meal_had_form.as_p }}
                 <input type="submit" class="btn" value="Add Meal">
-            </form>
-            <br>
-            <table class="striped">
-                <thead>
-                    <tr>
-                        <!-- <th>Decription</th>
-                        <th>Date</th> -->
-                    </tr>
-                </thead>
-                <tbody>
+              </form>
+              <br>
+              <table class="striped">
+                  <tbody>
                     {% for meal_had in restaurant.meal_had_set.all %}
                     <tr>
-                        <td>{{ meal_had.date }}</td>
-                        <td>{{ meal_had.description }}</td>                     
+                      <td>{{ meal_had.date }}</td>
+                      <td>{{ meal_had.description }}</td>                     
                     </tr>
                     {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                  </tbody>
+                </div>
+                </table>
+          </div>
     </div>
 </div>
 
