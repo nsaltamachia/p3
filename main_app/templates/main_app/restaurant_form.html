@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<body class="add-restaurant">
+
 {% if object %}
     <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
 {% else %}
@@ -15,5 +17,7 @@
     </table>
     <input type="submit" value="Submit!" class="btn">
 </form>
+
+</body>
 
 {% endblock %}
