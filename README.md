@@ -48,7 +48,3 @@ Created by three of us - one from Autin, one from Florida, and one Chi-city nati
 - [ ] Thumbs up only feature.
 - [ ] User image upload from a device to their meal post
 - [ ] L/R scrollable meal post view.
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
