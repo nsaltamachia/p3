@@ -49,3 +49,4 @@ Created by three of us - one from Autin, one from Florida, and one Chi-city nati
 - [ ] Thumbs up only feature.
 - [ ] User image upload from a device to their meal post
 - [ ] L/R scrollable meal post view.
+- [ ] The ability to allow the first and only creation of a restaurant by the first user that does it first.
