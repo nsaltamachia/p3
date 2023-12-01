@@ -46,7 +46,7 @@
 <!-- COMMENTS SECTION -->
 <h2>Comments</h2>
 
-<div>
+
   <table class="striped">
     <thead>
       <tr><th>User</th><th>Comment</th></tr>
@@ -63,12 +63,12 @@
       {% endfor %}
     </tbody>
   </table>
-</div>
+
 <br>
 <div class="col s6">
   <form action="{% url 'add_comment' restaurant_id=restaurant.id %}" method="POST">
     {% csrf_token %}
-    <!-- Render the inputs -->
+    <!-- Render the comments -->
     {{ comment_form.as_p }}
     <input type="submit" class="btn" value="Add Comment">
   </form>
