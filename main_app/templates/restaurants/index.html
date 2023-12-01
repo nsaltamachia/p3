@@ -1,24 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
+<body class="restaurant-index">
+  
+
 <h1>Restaurant List</h1>
 
 {% for restaurant in restaurants %}
 
 <div class="card">
   <a href="{% url 'detail' restaurant.id %}">
-    <div class="card-content">
+    <div class="index-card-content">
       <span class="card-title">{{ restaurant.name }}</span>
       <p>Address: {{ restaurant.address }}</p>
       <p>Neighborhood: {{ restaurant.neighborhood }}</p>
       <p>Cuisine: {{ restaurant.cuisine }}</p>
     </div>
   </a>
-      <div class="card-action">
-        <a href="{% url 'restaurants_update' restaurant.id %}">Edit</a>
-        <a href="{% url 'restaurants_delete' restaurant.id %}">Delete</a>
+      <div id="card-action">
+        <a id="ED" href="{% url 'restaurants_update' restaurant.id %}">Edit</a>
+        <a id="ED" href="{% url 'restaurants_delete' restaurant.id %}">Delete</a>
       </div>
-  
+      
+</div>
+
 {% endfor %}
 
 {% endblock %}
+
+</body>

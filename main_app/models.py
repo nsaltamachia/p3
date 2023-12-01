@@ -13,7 +13,7 @@ class Seat(models.Model):
     indoor_or_outdoor = models.CharField(max_length=7)
 
     def __str__(self):
-        return f"{self.seat_number}"
+        return f"{self.table_type}"
     
 class Restaurant(models.Model):
     name = models.CharField(max_length=150)
@@ -21,6 +21,7 @@ class Restaurant(models.Model):
     neighborhood = models.TextField(max_length=150)
     cuisine = models.TextField(max_length=150)
     seats = models.ManyToManyField(Seat)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):
         return f'{self.name} ({self.id})'
@@ -39,7 +40,8 @@ class Meal_Had(models.Model):
 class Comment(models.Model):
     comment = models.TextField(max_length=400)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     def __str__(self):
         return f"{self.id}"
     

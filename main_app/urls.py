@@ -8,7 +8,6 @@ urlpatterns = [
     path('restaurants/<int:restaurant_id>/', views.restaurant_detail, name='detail'),
     path('restaurants/create/', views.RestaurantCreate.as_view(), name='restaurants_create'),
     path('restaurants/<int:restaurant_id>/add_comment/', views.add_comment, name='add_comment'),
-    path('restaurants/<int:restaurant_id>/update_comment/<int:comment_id>/', views.update_comment, name='update_comment'),
     path('restaurants/<int:restaurant_id>/delete_comment/<int:comment_id>/', views.delete_comment, name='delete_comment'),
     path('restaurants/<int:restaurant_id>/add_meal_had/', views.add_meal_had, name='add_meal_had'),
     path('restaurants/<int:pk>/update/', views.RestaurantUpdate.as_view(), name='restaurants_update'),
@@ -22,4 +21,5 @@ urlpatterns = [
     path('seats/create/', views.SeatCreate.as_view(), name='seat_create'),
     path('seats/<int:pk>/update/', views.SeatUpdate.as_view(), name='seats_update'),
     path('seats/<int:pk>/delete/', views.SeatDelete.as_view(), name='seats_delete'),
+    path('accounts/signup/', views.signup, name='signup')
 ]

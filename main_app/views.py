@@ -9,6 +9,10 @@ from .models import Restaurant, Comment, Meal_Had, Seat
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from .forms import CommentForm, Meal_Had_Form
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def home(request):
@@ -18,6 +22,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def restaurants_index(request):
   restaurants = Restaurant.objects.all()
   return render(request, 'restaurants/index.html', 
@@ -26,41 +31,51 @@ def restaurants_index(request):
     }
   )
 
-class RestaurantCreate(CreateView):
+
+class RestaurantCreate(LoginRequiredMixin, CreateView):
    model = Restaurant
    fields = ['name', 'address', 'neighborhood', 'cuisine']
    success_url = '/restaurants'
 
-class RestaurantUpdate(UpdateView):
+   def form_valid(self, form):
+     # Assign the logged in user (self.request.user)
+     form.instance.user = self.request.user
+     return super().form_valid(form)
+
+
+class RestaurantUpdate(LoginRequiredMixin, UpdateView):
   model = Restaurant
   fields = ['address', 'neighborhood', 'cuisine']
 
-class RestaurantDelete(DeleteView):
+
+class RestaurantDelete(LoginRequiredMixin, DeleteView):
   model = Restaurant
   success_url = '/restaurants'
 
-class SeatCreate(CreateView):
+class SeatCreate(LoginRequiredMixin, CreateView):
   model = Seat
   fields = ['table_type', 'table_capacity', 'indoor_or_outdoor']
   success_url = '/seats/'
 
   def get_absolute_url(self):
     return reverse('detail', kwargs={'seat_id': self.id})
-class SeatList(ListView):
+
+class SeatList(LoginRequiredMixin, ListView):
   model = Seat
 
-class SeatDetail(DetailView):
+class SeatDetail(LoginRequiredMixin, DetailView):
   model = Seat
 
-class SeatUpdate(UpdateView):
+class SeatUpdate(LoginRequiredMixin, UpdateView):
   model = Seat
   fields = ['table_type', 'table_capacity', 'indoor_or_outdoor']
   success_url = '/seats/'
 
-class SeatDelete(DeleteView):
+class SeatDelete(LoginRequiredMixin, DeleteView):
   model = Seat
   success_url = '/seats'
 
+@login_required
 def restaurant_detail(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
     id_list = restaurant.seats.all().values_list('id')
@@ -72,6 +87,7 @@ def restaurant_detail(request, restaurant_id):
       'seats': seats_restaurant_doesnt_have
     })
 
+@login_required
 def add_comment(request, restaurant_id):
   if request.method == 'POST':
     form = CommentForm(request.POST)
@@ -83,35 +99,6 @@ def add_comment(request, restaurant_id):
   else:
     form = CommentForm()
 
-def update_comment(request, restaurant_id):
-  restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
-  if comment_id:
-     comment = get_object_or_404(Comment, pk=comment_id)
-     if request.method =='POST':
-        form = CommentForm(request.POST, instance=comment)
-        if form.is_valid():
-           form.save()
-           return redirect('detail', restaurant_id=restaurant_id)
-  else:
-    form = CommentForm
-  return render(request, 'comment_form.html', {
-     'form': form,
-     'restaurant': restaurant,
-     'comment_id': comment_id
-  })
-
-# def update_comment(request, restaurant_id, pk):
-#   update_comment = Comment.objects.get(id = pk)
-#   if request.method == 'POST':
-#     form = CommentForm(request.POST)
-#     if form.is_valid():
-#       update_comment = form.save(commit=False)
-#       update_comment.restaurant_id = restaurant_id
-#       update_comment.save()
-#       return redirect('detail', restaurant_id = restaurant_id)
-#   else:
-#         form = CommentForm()
-#   return render(request, 'comment_form.html', {'form': form})
 
 def delete_comment(request, comment_id, restaurant_id):
   if request.method == 'DELETE':
@@ -119,6 +106,7 @@ def delete_comment(request, comment_id, restaurant_id):
     comment.delete()
   return redirect('detail', restaurant_id=restaurant_id)
 
+@login_required
 def add_meal_had(request, restaurant_id):
     form = Meal_Had_Form(request.POST)
     if form.is_valid():
@@ -127,14 +115,32 @@ def add_meal_had(request, restaurant_id):
         new_meal_had.save()
     return redirect('detail', restaurant_id=restaurant_id)
 
+@login_required
 def assoc_seat(request, restaurant_id, seat_id):
   # Note that you can pass a toy's id instead of the whole toy object
   Restaurant.objects.get(id=restaurant_id).seats.add(seat_id)
   return redirect('detail', restaurant_id=restaurant_id)
 
+@login_required
 def unassoc_seat(request, restaurant_id, seat_id):
   # Note that you can pass a toy's id instead of the whole toy object
   Restaurant.objects.get(id=restaurant_id).seats.remove(seat_id)
   return redirect('detail', restaurant_id=restaurant_id)
 
+def signup(request):
+  error_message = ''
+  if request.method == 'POST':
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      # This will add the user to the database
+      user = form.save()
+      # This is how we log a user in via code
+      login(request, user)
+      return redirect('index')
+    else:
+      error_message = 'Invalid sign up - try again'
 
+    # A bad POST or a GET request, so render signup.html with an empty form
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'registration/signup.html', context)  
