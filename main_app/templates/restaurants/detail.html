@@ -108,10 +108,10 @@
     <center><button type="submit" class="btn">Add a Seating Type</button></center>
   </form>
   <br>
-  <form action="{% url 'seat_list' %}" method="POST">
+  <a href="{% url 'seat_list' %}">
     {% csrf_token %}
     <center><button type="submit" class="btn">View All Seating Types</button></center>
-  </form>
+  </a>
   {% if seats.count %}
     {% for seat in seats.all %}
       <div class="card">
