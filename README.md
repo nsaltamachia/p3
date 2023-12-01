@@ -13,8 +13,10 @@ Da Best In Chi is a foodie post and review website, where users can add/post/rev
 Created by three of us - one from Autin, one from Florida, and one Chi-city native - this project was not as easy as eating as we thought it would be.  From three creative minds with ideas to one github account for this project, lets not forget the many to many model - it was definitely a learning experience.  And with that, we managed to find a nice Chicago background for the site that incorporates the flag and its neighborhoods. Whether a local or just visiting, everyone can attest the Chicago food scene is a vibe and a must-try Chicago staple!  So Da Best In Chi welcomes all foodies, food connoisseurs, locals looking for a new place to try, and those just trying to get some grub - as (hopefully) their go-to for anything and everything Chicago food!
 
 
-![dbicinaction](![DBIC 1](https://github.com/nsaltamachia/p3/assets/145854969/d2775c13-3e01-42f2-a638-417b797d1099)
-![dbicinaction](![DBIC 2](https://github.com/nsaltamachia/p3/assets/145854969/750d0327-439f-4706-a810-64f2ad357b23)
+![dbicinaction]((https://github.com/nsaltamachia/p3/assets/145854969/54b2c7e9-e092-476d-98c3-8fa73dd97be2)
+
+
+![dbicinaction]((https://github.com/nsaltamachia/p3/assets/145854969/750d0327-439f-4706-a810-64f2ad357b23)
 
 
 ### Coding Challenges
