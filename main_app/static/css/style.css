@@ -40,6 +40,11 @@ p {
   color: #14213d;
 }
 
+a {
+  color: #c1121f;
+  font-weight: bold;
+}
+
 footer.page-footer {
   padding-top: 10;
   text-align: right;
@@ -60,37 +65,37 @@ div .col-s6 {
 .restaurant-index {
   background: url("../backgrounds/images/n22.jpg");
   background-position: center;
-  background-size:60%
+  background-size:50%;
 }
 
 .restaurant-about {
   background: url("../backgrounds/images/n22.jpg");
   background-position: center;
-  background-size:60%;
+  background-size:50%;
 }
 
 .restaurant-detail {
   background: url("../backgrounds/images/n22.jpg");
   background-position: center;
-  background-size:60%
+  background-size:50%;
 }
 
 .add-restaurant {
   background: url("../backgrounds/images/n22.jpg");
   background-position: center;
-  background-size:60%
+  background-size:50%;
 }
 
 .add-seat {
   background: url("../backgrounds/images/n22.jpg");
   background-position: center;
-  background-size:60%
+  background-size:50%;
 }
 
 .delete-res-confirm {
   background: url("../backgrounds/images/n22.jpg");
   background-position: center;
-  background-size:60%
+  background-size:50%;
 }
 
 .card-content {
@@ -112,7 +117,6 @@ div .col-s6 {
   text-shadow: 1px 1px #000000;
   font-size: 20px;
   padding: 20px;
-  text
 }
 
 .index-card {
