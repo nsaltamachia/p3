@@ -38,7 +38,7 @@ Created by three of us - one from Autin, one from Florida, and one Chi-city nati
 
 [Trello Board](https://trello.com/b/jddSwsy5/python-django-food-app)
 
-[Heroku Deployment] ()
+[Visit Da Best In Chi App](https://dabestinchi-bc4eabe56819.herokuapp.com/)
 
 
 ## Future Updates
