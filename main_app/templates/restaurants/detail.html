@@ -4,6 +4,7 @@
 <!-- DETAILS SECTION -->
 <h1>Restaurant Details</h1>
 
+<body class="restaurant-detail">
 
 <div class="row">
     <div class="col s6">
@@ -17,14 +18,7 @@
         </div>
         <!-- Meal Had  -->
         <h2>Meals Had</h2>
-          <div class="card-content">
-            <form action="{% url 'add_meal_had' restaurant.id %}" method="POST">
-              {% csrf_token %}
-              {{ meal_had_form.as_p }}
-              <input type="submit" class="btn" value="Add Meal">
-            </form>
-            <br>
-            <table class="striped index-card-content">
+          <table class="striped index-card-content">
               <tbody>
                 {% for meal_had in restaurant.meal_had_set.all %}
                 <tr>
@@ -34,10 +28,16 @@
                   {% endfor %}
               </tbody>
             </table>
+            <br>
+          <div class="card-content">
+            <form action="{% url 'add_meal_had' restaurant.id %}" method="POST">
+              {% csrf_token %}
+              {{ meal_had_form.as_p }}
+              <input type="submit" class="btn" value="Add Meal">
+            </form>
           </div>
       </div>
 </div>
-            <!-- <br> -->
 
 
 <!-- COMMENTS SECTION -->
@@ -102,9 +102,16 @@
   </div>
   <!-- Available seating will come after this line -->
   <div class="col s6">
-  <a href="{% url 'seat_create' %}">Add a Seating Type</a>
-  <a href="{% url 'seat_list' %}">View All Seating Types</a>
-  <h3>Seating Options</h3>
+  <h4><center>Seating Options</center></h4>
+  <form action="{% url 'seat_create' %}" method="POST">
+    {% csrf_token %}
+    <center><button type="submit" class="btn">Add a Seating Type</button></center>
+  </form>
+  <br>
+  <form action="{% url 'seat_list' %}" method="POST">
+    {% csrf_token %}
+    <center><button type="submit" class="btn">View All Seating Types</button></center>
+  </form>
   {% if seats.count %}
     {% for seat in seats.all %}
       <div class="card">
@@ -167,3 +174,4 @@
     
 {% endblock %}
 
+</body>
