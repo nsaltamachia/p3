@@ -45,6 +45,7 @@ Created by three of us - one from Autin, one from Florida, and one Chi-city nati
 
 
 ## Future Updates
+- [ ] Photos, Photos, Photos on the about page and eventually throught the restaurant detail pages.
 - [ ] Thumbs up only feature.
 - [ ] User image upload from a device to their meal post
 - [ ] L/R scrollable meal post view.
