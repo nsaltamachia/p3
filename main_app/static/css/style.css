@@ -2,7 +2,6 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background-color: #003049;
   font-family: 'Helvetica'
   
 }
@@ -13,7 +12,7 @@ h1 {
   font-size: 50px;
   color: #14213d;
   font-weight: bold;
-  /* text-shadow: 1px 1px #000000; */
+  text-shadow: 1px 1px #fdf0d5;
   padding: 15px;
   border-radius: 50px;  
 }
@@ -28,12 +27,17 @@ h2 {
   /* border-radius: 50px;   */
 }
 
-p {
-  color: #14213d;
+nav {
+  background-color: #c1121f;
+  color: #fdf0d5;
 }
 
 main {
   flex: 1 0 auto;
+}
+
+p {
+  color: #14213d;
 }
 
 footer.page-footer {
@@ -41,12 +45,6 @@ footer.page-footer {
   text-align: right;
   background-color: #c1121f;
 }
-
-nav {
-  background-color: #c1121f;
-  color: #FDF0D5;
-}
-
 
 div .col-s6 {
   color: #FDF0D5;
@@ -89,8 +87,10 @@ div .col-s6 {
   background-size:60%
 }
 
-.card {
-  background-color: rgba(103, 155, 188, .0);
+.delete-res-confirm {
+  background: url("../backgrounds/images/n22.jpg");
+  background-position: center;
+  background-size:60%
 }
 
 .card-content {
@@ -222,5 +222,12 @@ label {
   /* border-radius: 50px; */
 }
 
+.meal-had-post {
+  color: #14213d;
+  text-shadow: 1px 1px #fdf0d5;
+}
 
-
+.comment-post {
+  color: #14213d;
+  text-shadow: 1px 1px #fdf0d5;
+}

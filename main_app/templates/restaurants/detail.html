@@ -19,7 +19,7 @@
         <!-- Meal Had  -->
         <h2>Meals Had</h2>
           <table class="striped index-card-content">
-              <tbody>
+              <tbody class="meal-had-post">
                 {% for meal_had in restaurant.meal_had_set.all %}
                 <tr>
                   <td>{{ meal_had.date }}</td>
@@ -46,7 +46,7 @@
     <thead>
       <tr><th>User</th><th>Comment</th></tr>
     </thead>
-    <tbody>
+    <tbody class="comment-post">
       {% for comment in restaurant.comment_set.all %}
         <tr>
           <td>{{comment.user}}</td>
