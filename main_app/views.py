@@ -94,6 +94,7 @@ def add_comment(request, restaurant_id):
     if form.is_valid():
       new_comment = form.save(commit=False)
       new_comment.restaurant_id = restaurant_id
+      new_comment.user = request.user
       new_comment.save()
     return redirect('detail', restaurant_id = restaurant_id)
   else:
