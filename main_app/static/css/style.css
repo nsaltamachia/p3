@@ -100,11 +100,6 @@ div .col-s6 {
   font-size: 20px;
   padding: 20px;
 }
-/* span {
-  font-size: 35px;
-  font-weight: bold;
-  text-shadow: 1px 1px #000000;
-} */
 
 .index-card-content {
   background-color: rgba(103, 155, 188, .8);
@@ -112,7 +107,6 @@ div .col-s6 {
   text-shadow: 1px 1px #000000;
   font-size: 20px;
   padding: 20px;
-  text
 }
 
 .index-card {
@@ -151,46 +145,67 @@ div .col-s6 {
   background-color: #c1121f;
 }
 
+#id_table_type {
+  background-color: #003049;
+  color: rgb(253, 239, 211);
+  font-size: 20px;
+
+}
+
+#id_table_capacity {
+  background-color: #003049;
+  color: rgb(253, 239, 211);
+  font-size: 20px;
+  
+}
+
+#id_indoor_or_outdoor {
+  background-color: #003049;
+  color: rgb(253, 239, 211);
+  font-size: 20px;
+  
+}
+
 #id_address {
   background-color: #003049;
   color: rgb(253, 239, 211);
   font-size: 20px;
-  /* padding: 5px; */
 }
+  
 
 #id_name {
   background-color: #003049;
   color: rgb(253, 239, 211);
   font-size: 20px;
-  /* padding: 5px; */
+  
 }
 
 #id_neighborhood {
   background-color: #003049;
   color: rgb(253, 239, 211);
   font-size: 20px;
-  /* padding: 5px; */
+  
 }
 
 #id_cuisine {
   background-color: #003049;
   color: rgb(253, 239, 211);
   font-size: 20px;
-  /* padding: 5px; */
+  
 }
 
 #id_date {
   background-color: #003049;
   color: rgb(253, 239, 211);
   font-size: 30px;
-  /* padding: 5px; */
+  
 }
 
 #id_description {
   background-color: #003049;
   color: rgb(253, 239, 211);
   font-size: 30px;
-  /* padding: 5px; */
+  
 }
 
 label {
@@ -198,11 +213,9 @@ label {
   font-size: 20px;
 }
 
-/* table {
-  font-family:'Graduate', serif;
-  font-size: 25px;
-  color: white;
-} */
+table {
+ background-color: rgba(103, 155, 188, .8);
+}
 
 .restaurant-card {
   background-color: rgba(103, 155, 188, .8);
@@ -230,4 +243,11 @@ label {
 .comment-post {
   color: #14213d;
   text-shadow: 1px 1px #fdf0d5;
+}
+
+span.card-title {
+  color: #fdf0d5;
+  text-shadow: 1px 1px#14213d;
+  font-weight: bold;
+  font-size: 35px;
 }
